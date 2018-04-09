@@ -1,5 +1,10 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+	h1= title
+	p Welcome to #{title}
+	form(method='POST' action='/local_library/addname')
+		label(for='name') Name:
+		input(type='text', placeholder='Enter your first name' name='firstname')
+		input(type='text', placeholder='Enter your last name' name='lastname')
+		input(type='submit', value='Add name')
