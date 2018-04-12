@@ -26,38 +26,14 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Droom' });
   // res.json({ user: 'tobi' });
 });
-router.post('/addname', function (req, res) {
-	var personInfo = req.body;
-	var UserSchema = new User({
-	    firstName: personInfo.firstName,
-	    lastName: personInfo.lastName
-	});
-	var error = UserSchema.validateSync();
-	if(typeof error !== 'undefined'){
-		res.render('show_message', {error: error.errors, type: "error"});
-	}
-	UserSchema.save(function(err, User){
+router.get('/showData', function (req, res) {
+	var query = User.find({'lastName':'Coffee'}, 'firstName lastName').sort({ firstName: 1 });
+	query.exec( function(err, User){
 	    if(err)
 	        res.render('show_message', {message: "Database error", type: "error"});
 	    else
-	        res.render('show_message', {message: "New person added", type: "success", person: personInfo});
-        /*res.redirect('/');
-        res.redirect(url.format({
-        	pathname:"/local_library",
-        	query:req.query,
-        }));*/
+	        res.render('show_message', {message: "New person added", type: "success", person: User});
       });
-
-	/*to define model and save at the same time use
-	User.create({
-		firstName: personInfo.firstname,
-		lastName: personInfo.lastname
-	}, function (err, awesome_instance) {
-		if (err)
-			res.render('show_message', {message: "Database error", type: "error"});
-		else
-	        res.render('show_message', {message: "New person added", type: "success", person: personInfo});
-	});*/
 })
 
 module.exports = router;

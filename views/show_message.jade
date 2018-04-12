@@ -2,14 +2,8 @@ extends layout
 
 block content
 	- var columns =  ['firstName', 'lastName'];
-	if type == 'success'
-		h1= type
-		p #{message}
-			#container
-				ul
-					each column in columns
-						p #{person[column]}
-	else
-		each column in columns
-			if(typeof(error[column]) !== 'undefined')
-				li= error[column].message
+	h1= 'Data Given'
+	#container
+		ul
+			each pr in person
+				p #{pr.firstName} #{pr.lastName}
