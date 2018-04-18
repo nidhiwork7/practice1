@@ -1,9 +1,5 @@
 extends layout
 
 block content
-	- var columns =  ['firstName', 'lastName'];
-	h1= 'Data Given'
-	#container
-		ul
-			each pr in person
-				p #{pr.firstName} #{pr.lastName}
+	h1= type
+	p #{message}
