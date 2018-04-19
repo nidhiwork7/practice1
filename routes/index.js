@@ -1,26 +1,8 @@
 var express = require('express');
 const url = require('url');
-var mongoose = require('mongoose');
 var router = express.Router();
-mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://127.0.0.1/my_mongo");
 
-//Defining schemas
-var UserSchema = new mongoose.Schema({
-    firstName: {
-    	type: String,
-        min: [6, 'Too few eggs'],
-        max: 12,
-        required: [true, 'Please enter first name']
-    },
- 	lastName: {
- 		type: String,
- 		enum: ['Coffee', 'Tea', 'Water',],
-        required: true
-    }
-});
-// Compile model from schema
-var User = mongoose.model("User", UserSchema);
+var User = require('../models/User');
 
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Droom' });
