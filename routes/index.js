@@ -1,9 +1,6 @@
 var express = require('express');
 const url = require('url');
-var mongoose = require('mongoose');
 var router = express.Router();
-mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://127.0.0.1/my_mongo");
 
 //Defining schemas
 var UserSchema = new mongoose.Schema({
